@@ -36,6 +36,7 @@ def kruskal(grafo):
             arbol_minimo.append(arista)
     return arbol_minimo
 
+#diccionario
 grafo = {
         'nodos': ['A', 'B', 'C', 'D', 'E', 'F','G'],
         'aristas': [

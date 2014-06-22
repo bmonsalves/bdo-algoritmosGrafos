@@ -6,28 +6,42 @@ from heapq import *
 
 
 def prim( grafo ):
+    #crea listas en base a un indice comun, en este caso los indices seran los nodos 1 y 2
+    #en cada indice se almacena la tupla (c, n1, n2)
     conn = defaultdict( list )
     for c,n1,n2 in grafo['aristas']:
+        #direccionamiento
         conn[ n1 ].append( (c, n1, n2) )
         conn[ n2 ].append( (c, n2, n1) )
  
-    mst = []
+    recorrido = []
+    #toma el nodo inicial
     usado = set( grafo['nodos'][0] )
-    usable_arista = conn[ grafo['nodos'][0] ][:]
-    heapify( usable_arista )
+    #toma las aristas que contienen el nodo inicial
+    nueva_arista = conn[ grafo['nodos'][0] ][:]
+    
+    #mantiene en la posicion 0 el menor valor de la lista
+    heapify( nueva_arista )
  
-    while usable_arista:
-        cost, n1, n2 = heappop( usable_arista )
+    while nueva_arista:
+        #saca el primer valor de la lista y lo almacena en costo, n1, n2
+        costo, n1, n2 = heappop( nueva_arista )
+        #pregunta si el nodo final de la arista no ha sido visitado
         if n2 not in usado:
             usado.add( n2 )
-            mst.append( ( cost, n1, n2  ) )
- 
-            for e in conn[ n2 ]:
-                if e[ 2 ] not in usado:
-                    heappush( usable_arista, e )
-    return mst
- 
+            #agrega la arista al recorrido
+            recorrido.append( ( costo, n1, n2  ) )
+            #print "recorrido",recorrido
 
+            #recorre la lista de nodos invertidos y en caso de que no se aya pasado por el nodo lo agrega a la lista de aristas.
+            for e in conn[ n2 ]:
+                # e[2] corresponde al "nodo de llegada"
+                if e[ 2 ] not in usado:
+                    #agrega "e" a nueva_arista
+                    heappush( nueva_arista, e )
+    return recorrido
+ 
+#diccionario
 grafo = {
         'nodos': ['A','B','C','D','E','F','G'],
         'aristas': [
