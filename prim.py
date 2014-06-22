@@ -3,8 +3,6 @@ from heapq import *
 
 #BUSCAR ARBOL MINIMO 
 
-
-
 def prim( grafo ):
     #crea listas en base a un indice comun, en este caso los indices seran los nodos 1 y 2
     #en cada indice se almacena la tupla (c, n1, n2)
@@ -15,6 +13,7 @@ def prim( grafo ):
         conn[ n2 ].append( (c, n2, n1) )
  
     recorrido = []
+    
     #toma el nodo inicial
     usado = set( grafo['nodos'][0] )
     #toma las aristas que contienen el nodo inicial
