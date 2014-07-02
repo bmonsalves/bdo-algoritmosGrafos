@@ -54,3 +54,5 @@ grafo = {
         }
  
 print "prim:", prim(grafo)
+
+

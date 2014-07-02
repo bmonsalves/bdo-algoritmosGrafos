@@ -9,6 +9,7 @@ def dijkstra(grafo,inicio,fin,visitado=[],distancias={},anteriores={}):
         while fin != None:
             ruta.append(fin)
             fin=anteriores.get(fin,None)
+            print "ruta: ",ruta[::-1]
         return distancias[inicio], ruta[::-1]
 
     # Detectar si es la primera vez que pasa, establece la distancia actual como 0
@@ -20,10 +21,10 @@ def dijkstra(grafo,inicio,fin,visitado=[],distancias={},anteriores={}):
 
         if vecino not in visitado:
             vecinodist = distancias.get(vecino,sys.maxint)
-            tentativedist = distancias[inicio] + grafo[inicio][vecino]
+            distPosible = distancias[inicio] + grafo[inicio][vecino]
 
-            if tentativedist < vecinodist:
-                distancias[vecino] = tentativedist
+            if distPosible < vecinodist:
+                distancias[vecino] = distPosible
                 anteriores[vecino]=inicio
 
     # vecinos procesados, ahora marcan el nodo actual como visitado
